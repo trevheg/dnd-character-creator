@@ -57,15 +57,25 @@ nav ul {
     color: var(--first-color);
 }
 
-#nav-list a:hover {
+#nav-list li:hover {
     background-color: var(--secondary-color);
     color: var(--primary-color);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.current-page-tab {
+    background-color: var(--quaternary-color);
+    color: var(--primary-color);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 }
 
 /* main */
 
 main {
     flex: 1;
+    padding: 1rem;
 }
 
 /* footer */
