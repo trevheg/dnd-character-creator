@@ -1,4 +1,4 @@
-import { renderWithTemplate, loadTemplate} from "./utils.mjs"
+import { renderWithTemplate, loadTemplate } from "./utils.mjs"
 
 
 const currentYear = document.querySelector("#currentYear");
