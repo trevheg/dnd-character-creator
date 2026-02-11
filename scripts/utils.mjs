@@ -12,3 +12,13 @@ export async function loadTemplate(path) {
   return template;
 }
 
+export async function convertToJson(res) {
+  // Convert Response to JSON first
+  const jsonResponse = await res.json();
+
+  if (res.ok) {
+    return jsonResponse;
+  } else {
+    throw { name: 'serviceError', message: jsonResponse };
+  }
+}
