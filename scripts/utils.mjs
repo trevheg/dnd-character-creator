@@ -12,6 +12,7 @@ export async function loadTemplate(path) {
   return template;
 }
 
+// converts an api to json
 export async function convertToJson(res) {
   // Convert Response to JSON first
   const jsonResponse = await res.json();
@@ -21,4 +22,19 @@ export async function convertToJson(res) {
   } else {
     throw { name: 'serviceError', message: jsonResponse };
   }
+}
+
+export function addElement(parentElement, type, content, elementClass) {
+
+  const element = document.createElement(type);
+  element.innerHTML = content;
+  element.classList.add(elementClass);
+  parentElement.appendChild(element);
+}
+
+export function returnElement(type, content, elementClass) {
+  const element = document.createElement(type);
+  element.innerHTML = content;
+  element.classList.add(elementClass);
+  return element;
 }

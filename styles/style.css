@@ -87,6 +87,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin: 1rem;
 }
 
 .menu-button {
@@ -97,6 +98,11 @@ main {
     color: var(--quaternary-color);
     font-size: large;
     font-weight: bold;
+}
+
+/* info */
+.infoElement {
+    margin: 1rem;
 }
 
 /* footer */
