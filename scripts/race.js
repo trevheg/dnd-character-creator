@@ -1,5 +1,5 @@
 import { loadHeaderFooter } from "./headerFooter.mjs";
-import { convertToJson, addElement } from "./utils.mjs"
+import { convertToJson, addElement, returnElement, consoleAPI } from "./utils.mjs"
 
 loadHeaderFooter();
 
@@ -10,7 +10,6 @@ const dndShortAPI = "https://www.dnd5eapi.co"
 async function createList(api, category) {
     const response = await fetch(api + category);
     const data = await convertToJson(response);
-    // console.log(data.results)
     const list = data.results;
     return list;
 }
@@ -29,28 +28,41 @@ async function displayRaceInfo(info) {
     addElement(raceInfoElement, "h3", data.language_desc, "infoElement");
 
     // Traits
+    addElement(raceInfoElement, "h3", "Traits:");
     const traits = data.traits;
+    // make a button for each trait that opens a dialog with info about that trait      
 
-    addElement(raceInfoElement, "div", 
-        `<h3>${data.name} Traits:</h3>
-            <ul>${
-                traits.map(e => {
-                    return `<li> ${e.name}</li>`
-                })
-            }<ul>`, 
-        "infoElement");
-    console.log(data.traits)
-    console.log(typeof traits)
+    traits.forEach(trait => {        
+        const traitButton = returnElement("button", trait.name, "trait-button");
+        // make traitButton open a dialog with trait info
+        const traitDialog = returnElement("dialog", "", "trait-dialog")
+        
+        // Append dialog to DOM before attaching listener
+        raceInfoElement.appendChild(traitDialog);
+        
+        traitButton.addEventListener("click", async () => {
+            traitDialog.innerHTML = "";
+            traitDialog.classList.add('show');
+            const traitResponse = await fetch(dndShortAPI + trait.url);
+            const traitData = await convertToJson(traitResponse);
+            console.log(traitData)
+            addElement(traitDialog, "p", traitData.desc, "trait-description")
+            const closeButton = returnElement("button", "Close", "close-button");
+            closeButton.addEventListener('click', () => {
+                traitDialog.classList.remove('show');
+                traitDialog.close()
+            });
+            traitDialog.appendChild(closeButton);
 
-    traits.forEach(element => {
-        console.log(element.name)
+            traitDialog.showModal();
+        });
+
+        raceInfoElement.appendChild(traitButton);
     });
-
     
 
     // Ability Bonuses
-
-
+    
 
 
 }

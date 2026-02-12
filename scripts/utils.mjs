@@ -27,14 +27,30 @@ export async function convertToJson(res) {
 export function addElement(parentElement, type, content, elementClass) {
 
   const element = document.createElement(type);
-  element.innerHTML = content;
-  element.classList.add(elementClass);
+  if (content) {
+    element.innerHTML = content;
+  }
+  if (elementClass) {
+    element.classList.add(elementClass);
+  }
   parentElement.appendChild(element);
 }
 
 export function returnElement(type, content, elementClass) {
   const element = document.createElement(type);
-  element.innerHTML = content;
-  element.classList.add(elementClass);
+  if (content) {
+    element.innerHTML = content;
+  }
+  if (elementClass) {
+    element.classList.add(elementClass);
+  }
   return element;
 }
+
+// prints the result of an api to the console. Mainly for development purposes. 
+export async function consoleAPI(api) {
+      const response = await fetch(api);
+      const data = await convertToJson(response);
+      console.log(data);
+}
+
