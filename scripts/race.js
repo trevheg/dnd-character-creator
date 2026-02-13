@@ -1,25 +1,20 @@
+
 import { loadHeaderFooter } from "./headerFooter.mjs";
-import { convertToJson, addElement, returnElement, consoleAPI, addButton } from "./utils.mjs"
+import { convertToJson, consoleAPI } from "./utils.mjs"
+import { addElement, returnElement, addButton, createMenu } from "./elementCreation.mjs"
 
 loadHeaderFooter();
 
 const dndAPI = "https://www.dnd5eapi.co/api/2014/";
 const dndShortAPI = "https://www.dnd5eapi.co"
 
-// create a list of elements in a category given an api
-async function createList(api, category) {
-    const response = await fetch(api + category);
-    const data = await convertToJson(response);
-    const list = data.results;
-    return list;
-}
+
 
 async function displayRaceInfo(info) {
     // console.log(info);
     // console.log(dndShortAPI + info.url)
     const response = await fetch(dndShortAPI + info.url);
     const raceData = await convertToJson(response);
-    console.log(raceData);
     const raceInfoElement = document.querySelector("#race-info");
     raceInfoElement.innerHTML = "";
     
@@ -44,15 +39,13 @@ async function displayRaceInfo(info) {
         raceInfoElement.appendChild(traitDialog);
         
         traitButton.addEventListener("click", async () => {
+            // clear dialog
             traitDialog.innerHTML = "";
-            traitDialog.classList.add('show');
             const traitResponse = await fetch(dndShortAPI + trait.url);
             const traitData = await convertToJson(traitResponse);
-            // console.log(traitData)
             addElement(traitDialog, "p", traitData.desc, "trait-description")
             const closeButton = returnElement("button", "Close", "close-button");
             closeButton.addEventListener('click', () => {
-                traitDialog.classList.remove('show');
                 traitDialog.close()
             });
             traitDialog.appendChild(closeButton);
@@ -67,33 +60,31 @@ async function displayRaceInfo(info) {
     // Ability Bonuses
     addElement(raceInfoElement, "h3", "Ability Bonuses:")
     const abilityBonuses = raceData.ability_bonuses;
-    // console.log(abilityBonuses)
     abilityBonuses.forEach(bonus => {
         addElement(raceInfoElement, "h4", `    ${bonus.ability_score.name} +${bonus.bonus}`)
-        console.log(bonus)
+        });
+    
+    const abilityButtons = document.createElement("div");
+    abilityBonuses.forEach(async (bonus) => {
+        console.log(bonus.ability_score.url)
+        consoleAPI(dndShortAPI + bonus.ability_score.url)
+        const abilResponse = await fetch(dndShortAPI + bonus.ability_score.url);
+        const abilData = await convertToJson(abilResponse);
+        addButton(abilityButtons, abilData.full_name, "ability-button", () => {
+            const abilDesc = abilData.desc;
+            abilDesc.forEach(desc => console.log(desc))
+            // returnElement("dialog", )
         })
+    })
 
 
 }
 
 
-// Creaate a menu of everything in the submitted category
-async function createMenu(api, category, element) {
 
-    const list = await createList(api, category);
 
-    // create a button for each item in the menu
-    for (let key in list) {
-        const menuElement = document.querySelector(element)
-
-        const newButton = addButton(menuElement, list[key].name, "menu-button", () => displayRaceInfo(list[key]))
-
-    }
-
-}
-
-consoleAPI(dndAPI + "races/elf")
-createMenu(dndAPI, "races", "#race-menu")
+createMenu(dndAPI, "races", "#race-menu", displayRaceInfo)
+consoleAPI(dndAPI + "ability-scores/dex")
 
 
 

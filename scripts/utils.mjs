@@ -24,29 +24,9 @@ export async function convertToJson(res) {
   }
 }
 
-export function addElement(parentElement, type, content, elementClass) {
 
-  const element = returnElement(type, content, elementClass);
-  parentElement.appendChild(element);
-}
 
-export function returnElement(type, content, elementClass) {
-  const element = document.createElement(type);
-  if (content) {
-    element.innerHTML = content;
-  }
-  if (elementClass) {
-    element.classList.add(elementClass);
-  }
-  return element;
-}
 
-// creates a button and adds it to the parent element. 
-export function addButton(parentElement, content, buttonClass, event) {
-  const newButton = returnElement("button", content, buttonClass);
-  newButton.addEventListener("click", event);
-  parentElement.appendChild(newButton);
-}
 
 // prints the result of an api to the console. Mainly for development purposes. 
 export async function consoleAPI(api) {
