@@ -1,5 +1,5 @@
 import { loadHeaderFooter } from "./headerFooter.mjs";
-import { convertToJson, addElement, returnElement, consoleAPI } from "./utils.mjs"
+import { convertToJson, addElement, returnElement, consoleAPI, addButton } from "./utils.mjs"
 
 loadHeaderFooter();
 
@@ -18,18 +18,21 @@ async function displayRaceInfo(info) {
     // console.log(info);
     // console.log(dndShortAPI + info.url)
     const response = await fetch(dndShortAPI + info.url);
-    const data = await convertToJson(response);
-    console.log(data);
+    const raceData = await convertToJson(response);
+    console.log(raceData);
     const raceInfoElement = document.querySelector("#race-info");
     raceInfoElement.innerHTML = "";
-    addElement(raceInfoElement, "h3", data.alignment, "infoElement");
-    addElement(raceInfoElement, "h3", data.size_description, "infoElement");
-    addElement(raceInfoElement, "h3", data.age, "infoElement");
-    addElement(raceInfoElement, "h3", data.language_desc, "infoElement");
+    
+    addElement(raceInfoElement, "h2", raceData.name, "infoElement");
+    addElement(raceInfoElement, "h3", raceData.alignment, "infoElement");
+    addElement(raceInfoElement, "h3", raceData.size_description, "infoElement");
+    addElement(raceInfoElement, "h3", raceData.age, "infoElement");
+    addElement(raceInfoElement, "h3", raceData.language_desc, "infoElement");
 
     // Traits
+    
     addElement(raceInfoElement, "h3", "Traits:");
-    const traits = data.traits;
+    const traits = raceData.traits;
     // make a button for each trait that opens a dialog with info about that trait      
 
     traits.forEach(trait => {        
@@ -45,7 +48,7 @@ async function displayRaceInfo(info) {
             traitDialog.classList.add('show');
             const traitResponse = await fetch(dndShortAPI + trait.url);
             const traitData = await convertToJson(traitResponse);
-            console.log(traitData)
+            // console.log(traitData)
             addElement(traitDialog, "p", traitData.desc, "trait-description")
             const closeButton = returnElement("button", "Close", "close-button");
             closeButton.addEventListener('click', () => {
@@ -62,7 +65,13 @@ async function displayRaceInfo(info) {
     
 
     // Ability Bonuses
-    
+    addElement(raceInfoElement, "h3", "Ability Bonuses:")
+    const abilityBonuses = raceData.ability_bonuses;
+    // console.log(abilityBonuses)
+    abilityBonuses.forEach(bonus => {
+        addElement(raceInfoElement, "h4", `    ${bonus.ability_score.name} +${bonus.bonus}`)
+        console.log(bonus)
+        })
 
 
 }
@@ -73,26 +82,17 @@ async function createMenu(api, category, element) {
 
     const list = await createList(api, category);
 
-
     // create a button for each item in the menu
     for (let key in list) {
         const menuElement = document.querySelector(element)
-        // try replacing code with addElement
-        // addElement(menuElement, "button", );
 
-        const newButton = document.createElement('button');
-        newButton.innerText = list[key].name;
-        newButton.classList.add("menu-button")
-        // console.log(list[key].url)
-        // newButton.dataset.apiURL = list[key].url;
-        newButton.addEventListener("click", () => displayRaceInfo(list[key]));
-        
-        menuElement.appendChild(newButton);
+        const newButton = addButton(menuElement, list[key].name, "menu-button", () => displayRaceInfo(list[key]))
+
     }
 
 }
 
-
+consoleAPI(dndAPI + "races/elf")
 createMenu(dndAPI, "races", "#race-menu")
 
 
