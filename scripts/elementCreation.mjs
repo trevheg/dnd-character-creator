@@ -1,18 +1,20 @@
 import { convertToJson } from "./utils.mjs";
 
 // Creaate a menu of everything in the submitted category
-export async function createMenu(api, category, element, event) {
-    const list = await createList(api, category);
+export async function createMenu(api, parentElement, event) {
+    const list = await createList(api);
     // create a button for each item in the menu
-    for (let key in list) {
-      const menuElement = document.querySelector(element)
-      addButton(menuElement, list[key].name, "menu-button", () => event(list[key]))
+    const menuDiv = document.createElement("div");
+    menuDiv.classList.add("menu");
+    for (let key in list) {    
+      addButton(menuDiv, list[key].name, "menu-button", () => event(list[key]))
     }
+    parentElement.appendChild(menuDiv);
 }
 
 // create a list of elements in a category given an api
-export async function createList(api, category) {
-    const response = await fetch(api + category);
+export async function createList(api) {
+    const response = await fetch(api);
     const data = await convertToJson(response);
     const list = data.results;
     return list;
@@ -42,3 +44,10 @@ export function addButton(parentElement, content, buttonClass, event) {
   newButton.addEventListener("click", event);
   parentElement.appendChild(newButton);
 }
+
+export function returnButton(content, buttonClass, event) {
+  const newButton = returnElement("button", content, buttonClass);
+  newButton.addEventListener("click", event);
+  returnButton;
+}
+
