@@ -22,44 +22,7 @@ body {
     min-height: 100vh;
 }
 
-button {
-    
-    padding: 1rem;
-    border-radius: 1rem;
-    border-color: var(--secondary-color);
-    background-color: var(--tertiary-color);
-    color: var(--quaternary-color);
-    font-size: large;
-    font-weight: bold;
-}
 
-dialog {
-  transition: scale .3s ease allow-discrete, opacity .3s ease allow-discrete;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  transform-origin: 50% 50%;
-  max-width: 90vw;
-  max-height: 90vh;
-    padding: 1rem;
-    border-radius: 1rem;
-    max-width: 500px;
-}
-
-dialog[open] {
-  display: flex;
-  flex-direction: column;
-  scale: 1;
-  opacity: 1;
-}
-
-@starting-style {
-  dialog[open] {
-    scale: 0;
-    opacity: 0;
-  }
-}
 
 dialog[open]::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
@@ -124,6 +87,89 @@ main {
     margin: auto;
 }
 
+/* form */
+
+form div {
+    width: 100%;
+
+
+}
+
+.form-div form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    width: 300px;
+}
+
+.form-div form label {
+    display: block;
+    font-size: larger;
+    color: var(--primary-color);
+    font-weight: bolder;
+}
+
+.form-div form input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .5rem;
+}
+
+.form-div form input[type="submit"],
+.form-div form button[type="submit"] {
+    padding: 1rem;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--quaternary-color);
+    font-size: large;
+    border-radius: 1rem;
+    border: 2px solid var(--tertiary-color) ;
+
+}
+
+
+
+
+button {
+    
+    padding: 1rem;
+    border-radius: 1rem;
+    border-color: var(--secondary-color);
+    background-color: var(--tertiary-color);
+    color: var(--quaternary-color);
+    font-size: large;
+    font-weight: bold;
+    margin: .5rem;
+}
+
+dialog {
+  transition: scale .3s ease allow-discrete, opacity .3s ease allow-discrete;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  transform-origin: 50% 50%;
+  max-width: 90vw;
+  max-height: 90vh;
+    padding: 1rem;
+    border-radius: 1rem;
+    max-width: 500px;
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+  scale: 1;
+  opacity: 1;
+}
+
+@starting-style {
+  dialog[open] {
+    scale: 0;
+    opacity: 0;
+  }
+}
 /* menu */
 .menu {
     width: 100%;
@@ -142,8 +188,6 @@ main {
     background-color: var(--primary-color);
     margin: .5rem;  
 }
-
-
 
 .trait-description {
     padding: 1rem;

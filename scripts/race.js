@@ -1,6 +1,6 @@
 
 import { loadHeaderFooter } from "./headerFooter.mjs";
-import { convertToJson, consoleAPI } from "./utils.mjs"
+import { consoleAPI, convertToJson } from "./utils.mjs"
 import { addElement, returnElement, addButton, createMenu, returnButton } from "./elementCreation.mjs"
 
 loadHeaderFooter();
@@ -8,7 +8,9 @@ loadHeaderFooter();
 const dndAPI = "https://www.dnd5eapi.co/api/2014/";
 const dndShortAPI = "https://www.dnd5eapi.co"
 
-
+const character = JSON.parse(localStorage.getItem("character"));
+document.querySelector("#character-name").textContent = character.name;
+consoleAPI("https://www.dnd5eapi.co/api/2014/races/dragonborn")
 
 async function displayRaceInfo(info) {
     const raceInfoElement = document.querySelector("#race-info");
@@ -56,24 +58,14 @@ async function displayRaceInfo(info) {
         raceInfoElement.appendChild(traitButton);
     });
 
-
-    
-
     // Ability Bonuses
 
     addElement(raceInfoElement, "h3", "Ability Bonuses:")
     const abilityBonuses = raceData.ability_bonuses;
-
-    // const abilityButton = returnElement("button", abilityBonuses, "abilityButton")
-
     
     const abilityButtons = document.createElement("div");
-    // abilityButtons.classList.add("menu")
-    // console.log(abilityBonuses)
-
 
     abilityBonuses.forEach(async (bonus) => {
-        console.log(bonus)
         const abilityButton = returnElement("button", `${bonus.ability_score.name} +${bonus.bonus}` , "ability-button");
         const abilityDialog = returnElement("dialog", "", "ability-dialog");
 
@@ -91,20 +83,24 @@ async function displayRaceInfo(info) {
 
         })
 
-        // console.log(bonus.ability_score.url);
-        // consoleAPI(dndShortAPI + bonus.ability_score.url);
-
         abilityButtons.appendChild(abilityButton)
 
     })
     raceInfoElement.appendChild(abilityButtons);
 
+    // submit
+    const submitButton = addButton(raceInfoElement, `Make ${character.name} a(n) ${raceData.name}?`, "submit-button", () => {
+        character.race = raceData.index;
+        console.log(raceData.index);
+        localStorage.setItem('character', JSON.stringify(character));
+        window.location.href = "class.html";
+    } );
+    
 }
 
 
 
 createMenu(dndAPI + "races", document.querySelector("#race-menu"), displayRaceInfo)
-consoleAPI(dndAPI + "ability-scores/dex")
 
 
 

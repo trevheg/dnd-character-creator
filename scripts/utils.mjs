@@ -24,11 +24,20 @@ export async function convertToJson(res) {
   }
 }
 
+// retrieve data from localstorage
+export function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+// save data to local storage
+export function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
 
 
 
 
-// prints the result of an api to the console. Mainly for development purposes. 
+
+// prints the result of an api to the console. For development purposes. 
 export async function consoleAPI(api) {
       const response = await fetch(api);
       const data = await convertToJson(response);

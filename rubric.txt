@@ -1,0 +1,23 @@
+1. JavaScript
+Robust programming logic was demonstrated including multiple examples of non-trivial work most likely outside the bounds of the given examples in the course. JS was used to dynamically create a web application from JSON data retrieved from a third-party API.
+
+2. Third-party APIs
+Extensive use of API(s) was used effectively to produce a rich experience, including 2 or more unique endpoints.
+
+3. JSON
+Extensive use of non-trivial JSON data to provide a dynamic website experience. Required: arrays of JSON data with 8+ unique attributes.
+
+4. Advanced CSS
+Advanced features of CSS were used in 4+ places and evident. Advanced features include: animations, transitions, card flips, hover events.
+
+5. Events
+Five or more events were used to produce a responsive experience.
+
+6. LocalStorage Used Effectively
+Local storage was used to save and retrieve multiple (3-5) properties to enhance the site experience.
+
+7. Trello Board
+The student's project Trello board was provided and demonstrates evidence of use with tasks.
+
+8. Video
+The student's video is about 5 minutes long, shows the student face, and demonstrates the functionality of their application.
