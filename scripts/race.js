@@ -10,10 +10,9 @@ const dndShortAPI = "https://www.dnd5eapi.co"
 
 const character = JSON.parse(localStorage.getItem("character"));
 document.querySelector("#character-name").textContent = character.name;
-consoleAPI("https://www.dnd5eapi.co/api/2014/races/dragonborn")
 
 async function displayRaceInfo(info) {
-    const raceInfoElement = document.querySelector("#race-info");
+    const raceInfoElement = document.querySelector("#information");
     // fetch api
     const response = await fetch(dndShortAPI + info.url);
     const raceData = await convertToJson(response);
@@ -91,7 +90,6 @@ async function displayRaceInfo(info) {
     // submit
     const submitButton = addButton(raceInfoElement, `Make ${character.name} a(n) ${raceData.name}?`, "submit-button", () => {
         character.race = raceData.index;
-        console.log(raceData.index);
         localStorage.setItem('character', JSON.stringify(character));
         window.location.href = "class.html";
     } );
@@ -100,7 +98,7 @@ async function displayRaceInfo(info) {
 
 
 
-createMenu(dndAPI + "races", document.querySelector("#race-menu"), displayRaceInfo)
+createMenu(dndAPI + "races", document.querySelector("#menu"), displayRaceInfo)
 
 
 
