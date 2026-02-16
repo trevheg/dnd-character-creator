@@ -30,21 +30,24 @@ async function displayClassInfo(info) {
     const subclassResponse = await fetch(dndShortAPI + data.subclasses[0].url);
     const subclassData = await convertToJson(subclassResponse);  
     // console.log(subclassData)        
-    addElement(infoElement, "h2", `${subclassData.name} ${data.name}` , "infoElement");
-    addElement(infoElement, "h3", subclassData.desc)
+    addElement(infoElement, "h2", `${subclassData.name} ${data.name}` , "");
+    addElement(infoElement, "h3", subclassData.desc, "infoElement")
 
     // consoleAPI(dndShortAPI + data.class_levels)
     // consoleAPI(dndShortAPI + subclassData.subclass_levels[0])
 
     // display class features at level 1
-    addElement(infoElement, "h2", data.name + " Level 1 features:")
+    addElement(infoElement, "h2", " Level 1 features:")
 
 
     const levelOneResponse = await fetch(dndShortAPI + data.class_levels);
     const levelOneData = await convertToJson(levelOneResponse);  
-    // console.log(levelOneData[0].features)
+
+
+
 
     const features = levelOneData[0].features;
+    const featuresButtons = document.createElement("div");
     features.forEach(feature => {
         const button = returnElement('button', feature.name, 'feature-button');
         const dialog = returnElement('dialog', '', 'feature-dialog');
@@ -63,11 +66,12 @@ async function displayClassInfo(info) {
         
                     dialog.showModal();
         });
-        infoElement.appendChild(button);
+        featuresButtons.appendChild(button);
     })
+    infoElement.appendChild(featuresButtons)
 
     const submitButton = addButton(infoElement, `Make ${character.name} a(n) ${data.name}`, "submit-button", () => {
-        character.class = data.index;
+        character.class = data.name;
         localStorage.setItem('character', JSON.stringify(character));
         window.location.href = "class.html";
     } );

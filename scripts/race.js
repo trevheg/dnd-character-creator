@@ -19,7 +19,7 @@ async function displayRaceInfo(info) {
     
     raceInfoElement.innerHTML = "";
     
-    addElement(raceInfoElement, "h2", raceData.name, "infoElement");
+    addElement(raceInfoElement, "h2", raceData.name, "");
     addElement(raceInfoElement, "h3", raceData.alignment, "infoElement");
     addElement(raceInfoElement, "h3", raceData.size_description, "infoElement");
     addElement(raceInfoElement, "h3", raceData.age, "infoElement");
@@ -28,7 +28,7 @@ async function displayRaceInfo(info) {
 
     // Traits
     
-    addElement(raceInfoElement, "h3", "Traits:");
+    addElement(raceInfoElement, "h2", "Traits:");
     const traits = raceData.traits;
     // make a button for each trait that opens a dialog with info about that trait      
 
@@ -59,7 +59,7 @@ async function displayRaceInfo(info) {
 
     // Ability Bonuses
 
-    addElement(raceInfoElement, "h3", "Ability Bonuses:")
+    addElement(raceInfoElement, "h2", "Ability Bonuses:")
     const abilityBonuses = raceData.ability_bonuses;
     
     const abilityButtons = document.createElement("div");
@@ -89,7 +89,7 @@ async function displayRaceInfo(info) {
 
     // submit
     const submitButton = addButton(raceInfoElement, `Make ${character.name} a(n) ${raceData.name}`, "submit-button", () => {
-        character.race = raceData.index;
+        character.race = raceData.name;
         localStorage.setItem('character', JSON.stringify(character));
         window.location.href = "class.html";
     } );

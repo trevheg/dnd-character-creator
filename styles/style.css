@@ -189,7 +189,7 @@ dialog[open] {
     margin: 1rem;
 }
 
-.trait-button {
+.submit-button {
     background-color: var(--primary-color);
     margin: .5rem;  
 }
@@ -198,6 +198,21 @@ dialog[open] {
     padding: 1rem;
 }
 
+/* character sheet */
+
+#character-sheet {
+    border: solid,.5rem, var(--tertiary-color);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.character-sheet-section-title {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    border: solid, var(--primary-color);
+    border-radius: 1rem;
+    margin: .5rem;
+}
 /* footer */
 
 footer {

@@ -5,4 +5,10 @@ import { addElement, returnElement, addButton, createMenu, returnButton } from "
 loadHeaderFooter();
 
 const character = JSON.parse(localStorage.getItem("character"));
-document.querySelector("#character-name").textContent = character.name;
+
+const characterNames = document.querySelectorAll(".character-name");
+characterNames.forEach(characterName => characterName.textContent = character.name);
+
+document.querySelector("#character-race").textContent = character.race;
+document.querySelector("#character-class").textContent = character.class;
+
