@@ -143,6 +143,11 @@ button {
     margin: .5rem;
 }
 
+button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color)
+}
+
 dialog {
   transition: scale .3s ease allow-discrete, opacity .3s ease allow-discrete;
   position: fixed;

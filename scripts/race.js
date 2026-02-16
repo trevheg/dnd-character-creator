@@ -88,7 +88,7 @@ async function displayRaceInfo(info) {
     raceInfoElement.appendChild(abilityButtons);
 
     // submit
-    const submitButton = addButton(raceInfoElement, `Make ${character.name} a(n) ${raceData.name}?`, "submit-button", () => {
+    const submitButton = addButton(raceInfoElement, `Make ${character.name} a(n) ${raceData.name}`, "submit-button", () => {
         character.race = raceData.index;
         localStorage.setItem('character', JSON.stringify(character));
         window.location.href = "class.html";

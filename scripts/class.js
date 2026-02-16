@@ -66,7 +66,7 @@ async function displayClassInfo(info) {
         infoElement.appendChild(button);
     })
 
-    const submitButton = addButton(infoElement, `Make ${character.name} a(n) ${data.name}?`, "submit-button", () => {
+    const submitButton = addButton(infoElement, `Make ${character.name} a(n) ${data.name}`, "submit-button", () => {
         character.class = data.index;
         localStorage.setItem('character', JSON.stringify(character));
         window.location.href = "class.html";
