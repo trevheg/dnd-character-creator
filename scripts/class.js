@@ -28,6 +28,7 @@ async function displayClassInfo(info) {
     // creating a div to put inside the other div so that it can be erased and expand when created 
     const infoElement = document.createElement("div");
     infoElement.classList.add("infoElement");
+    infoElement.classList.add("info-box");
 
 
     // Display the Chosen Class and Information about that class

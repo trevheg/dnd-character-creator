@@ -130,6 +130,9 @@ form div {
     width: 100%;
     box-sizing: border-box;
     padding: .5rem;
+    /* height: 3rem; */
+    border-radius: .5rem;
+    font-size: x-large;
 }
 
 .form-div form input[type="submit"],
@@ -145,7 +148,7 @@ form div {
 }
 
 /* name generator */
-#name-generator, #name-input {
+.info-box {
     border: solid var(--tertiary-color) .5rem;
     margin: 1rem;
     padding: 1rem;
@@ -188,7 +191,12 @@ dialog[open] {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 1rem;
+    margin: auto;
+}
+
+#menu {
+    padding: 1rem;
+    /* margin: auto; */
 }
 
 /* info */

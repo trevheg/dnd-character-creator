@@ -16,14 +16,18 @@
     <header ></header>
     <main>
         <!-- <h2><a href="race.html" id="startHere">Click Here to Start Creating Your Character!</a></h2> -->
-         <div class="form-div" id="name-input">
+         <div class="info-box">
+            <h1>Welcome to the simple D&D Character Creator</h1>
+            <h2>To begin, create a name below:</h2>
+         </div>
+         <div class="form-div info-box" id="name-input">
             <form id="characterForm">
                 <label for="characterName">Write your character name here:</label>
                 <input type="text" id="characterName" name="characterName" placeholder="Character name" required>
                 <input type="submit" id="submitCharacter" value="Make Your Character!">
             </form>  
          </div>
-         <div id="name-generator">
+         <div id="name-generator" class="info-box">
             <h2>Can't think of a name? Try our name generator: </h2>
             <button id="generate-button">Generate a name</button>
             <h2 id="generated-name"></h2>
