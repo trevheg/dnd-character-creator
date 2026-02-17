@@ -19,10 +19,13 @@ const generatedName = document.querySelector("#generated-name");
 generateButton.addEventListener("click", () => {
     generatedName.textContent = returnName() + " " + returnName();
     const nameGenerator = document.querySelector("#name-generator");
-    addButton(nameGenerator, "Use generated name", "", () => {
-        const character = new Character (generatedName.textContent);
-        localStorage.setItem('character', JSON.stringify(character));
-        window.location.href = "race.html";
-    })
+    if (!document.querySelector(".use-name-button")) {
+        addButton(nameGenerator, "Use generated name", "use-name-button", () => {
+            const character = new Character (generatedName.textContent);
+            localStorage.setItem('character', JSON.stringify(character));
+            window.location.href = "race.html";
+        })
+    }
+    
 })
 
