@@ -12,7 +12,12 @@ const dndShortAPI = "https://www.dnd5eapi.co"
 const character = JSON.parse(localStorage.getItem("character")) || new Character();
 document.querySelector("#character-name").textContent = character.name;
 
+consoleAPI(dndAPI);
+consoleAPI(dndAPI + "races");
+
+
 async function displayRaceInfo(info) {
+    consoleAPI(dndShortAPI + info.url)
 
     // make the button of the current attribute glint
     glint(info);
