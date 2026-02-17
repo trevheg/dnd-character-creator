@@ -103,7 +103,7 @@ async function displayRaceInfo(info) {
     } );
         
 
-    // informationElement.appendChild(infoElement);
+
     
     informationElement.appendChild(infoElement);
     infoElement.offsetHeight;
