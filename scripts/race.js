@@ -12,23 +12,31 @@ const character = JSON.parse(localStorage.getItem("character"));
 document.querySelector("#character-name").textContent = character.name;
 
 async function displayRaceInfo(info) {
-    const raceInfoElement = document.querySelector("#information");
+    const informationElement = document.querySelector("#information");  
+    // deletes the info element div
+    informationElement.innerHTML = ""; 
+    // const infoElement = returnElement("div", '', "infoElement");
+
+    const infoElement = document.createElement("div");
+    infoElement.classList.add("infoElement");
+    
+
     // fetch api
     const response = await fetch(dndShortAPI + info.url);
     const raceData = await convertToJson(response);
     
-    raceInfoElement.innerHTML = "";
+
     
-    addElement(raceInfoElement, "h2", raceData.name, "");
-    addElement(raceInfoElement, "h3", raceData.alignment, "infoElement");
-    addElement(raceInfoElement, "h3", raceData.size_description, "infoElement");
-    addElement(raceInfoElement, "h3", raceData.age, "infoElement");
-    addElement(raceInfoElement, "h3", raceData.language_desc, "infoElement");
+    addElement(infoElement, "h2", raceData.name, "");
+    addElement(infoElement, "h3", raceData.alignment, "factElement");
+    addElement(infoElement, "h3", raceData.size_description, "factElement");
+    addElement(infoElement, "h3", raceData.age, "factElement");
+    addElement(infoElement, "h3", raceData.language_desc, "factElement");
 
 
     // Traits
     
-    addElement(raceInfoElement, "h2", "Traits:");
+    addElement(infoElement, "h2", "Traits:");
     const traits = raceData.traits;
     // make a button for each trait that opens a dialog with info about that trait      
 
@@ -39,7 +47,7 @@ async function displayRaceInfo(info) {
         const traitDialog = returnElement("dialog", "", "trait-dialog")
         
         // Append dialog to DOM before attaching listener
-        raceInfoElement.appendChild(traitDialog);
+        infoElement.appendChild(traitDialog);
         
         traitButton.addEventListener("click", async () => {
             // clear dialog
@@ -54,12 +62,12 @@ async function displayRaceInfo(info) {
             traitDialog.showModal();
         });
 
-        raceInfoElement.appendChild(traitButton);
+        infoElement.appendChild(traitButton);
     });
 
     // Ability Bonuses
 
-    addElement(raceInfoElement, "h2", "Ability Bonuses:")
+    addElement(infoElement, "h2", "Ability Bonuses:")
     const abilityBonuses = raceData.ability_bonuses;
     
     const abilityButtons = document.createElement("div");
@@ -68,7 +76,7 @@ async function displayRaceInfo(info) {
         const abilityButton = returnElement("button", `${bonus.ability_score.name} +${bonus.bonus}` , "ability-button");
         const abilityDialog = returnElement("dialog", "", "ability-dialog");
 
-        raceInfoElement.appendChild(abilityDialog);
+        infoElement.appendChild(abilityDialog);
 
         abilityButton.addEventListener("click", async () => {
             abilityDialog.innerHTML = "";
@@ -85,15 +93,21 @@ async function displayRaceInfo(info) {
         abilityButtons.appendChild(abilityButton)
 
     })
-    raceInfoElement.appendChild(abilityButtons);
+    infoElement.appendChild(abilityButtons);
 
     // submit
-    const submitButton = addButton(raceInfoElement, `Make ${character.name} a(n) ${raceData.name}`, "submit-button", () => {
+    const submitButton = addButton(infoElement, `Make ${character.name} a(n) ${raceData.name}`, "submit-button", () => {
         character.race = raceData.name;
         localStorage.setItem('character', JSON.stringify(character));
         window.location.href = "class.html";
     } );
+        
+
+    // informationElement.appendChild(infoElement);
     
+    informationElement.appendChild(infoElement);
+    infoElement.offsetHeight;
+    infoElement.classList.add("expanded");
 }
 
 

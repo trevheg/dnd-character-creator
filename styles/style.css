@@ -87,6 +87,22 @@ main {
     margin: auto;
 }
 
+button { 
+    padding: 1rem;
+    border-radius: 1rem;
+    border-color: var(--secondary-color);
+    background-color: var(--tertiary-color);
+    color: var(--quaternary-color);
+    font-size: large;
+    font-weight: bold;
+    margin: .5rem;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color)
+}
+
 /* form */
 
 form div {
@@ -131,23 +147,6 @@ form div {
 
 
 
-button {
-    
-    padding: 1rem;
-    border-radius: 1rem;
-    border-color: var(--secondary-color);
-    background-color: var(--tertiary-color);
-    color: var(--quaternary-color);
-    font-size: large;
-    font-weight: bold;
-    margin: .5rem;
-}
-
-button:hover {
-    background-color: var(--secondary-color);
-    color: var(--primary-color)
-}
-
 dialog {
   transition: scale .3s ease allow-discrete, opacity .3s ease allow-discrete;
   position: fixed;
@@ -185,7 +184,17 @@ dialog[open] {
 }
 
 /* info */
-.infoElement {
+.infoElement{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s ease-out;
+} 
+
+.infoElement.expanded {
+    max-height: 100%;
+}
+
+.factElement {
     margin: 1rem;
 }
 

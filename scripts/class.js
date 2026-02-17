@@ -22,6 +22,8 @@ async function displayClassInfo(info) {
     const data = await convertToJson(response);    
     console.log(data)
 
+    infoElement.classList.remove('expanded');
+
     infoElement.innerHTML = '';
 
     // console.log(dndShortAPI + data.subclasses[0].url)
@@ -31,7 +33,7 @@ async function displayClassInfo(info) {
     const subclassData = await convertToJson(subclassResponse);  
     // console.log(subclassData)        
     addElement(infoElement, "h2", `${subclassData.name} ${data.name}` , "");
-    addElement(infoElement, "h3", subclassData.desc, "infoElement")
+    addElement(infoElement, "h3", subclassData.desc, "factElement")
 
     // consoleAPI(dndShortAPI + data.class_levels)
     // consoleAPI(dndShortAPI + subclassData.subclass_levels[0])
@@ -75,6 +77,12 @@ async function displayClassInfo(info) {
         localStorage.setItem('character', JSON.stringify(character));
         window.location.href = "class.html";
     } );
+
+    // make info element grow instead of suddenly appear
+
+    infoElement.offsetHeight;  // Force reflow
+    infoElement.classList.add('expanded');
+
 }
 
 createMenu(dndAPI + "classes", document.querySelector("#menu"), displayClassInfo)
