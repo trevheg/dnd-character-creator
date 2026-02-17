@@ -38,9 +38,16 @@ async function displayRaceInfo(info) {
 
     // Traits
     
-    addElement(infoElement, "h2", "Traits:");
+    
     const traits = raceData.traits;
-    // make a button for each trait that opens a dialog with info about that trait      
+    if (traits.length === 0) {
+        addElement(infoElement, "h2", "Traits: none");
+
+    } else {
+        addElement(infoElement, "h2", "Traits:");
+    }
+    // make a button for each trait that opens a dialog with info about that trait 
+
 
 
     traits.forEach(trait => {        
