@@ -44,3 +44,13 @@ export async function consoleAPI(api) {
       console.log(data);
 }
 
+export function glint(info){
+      // make the button of the current attribute glint
+    const menuButtons = document.querySelectorAll(".menu-button");
+    menuButtons.forEach(button => {
+        button.classList.remove("showing-attribute")
+        if (button.textContent == info.name) {
+            button.classList.add("showing-attribute")
+        }
+        })
+}

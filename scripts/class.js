@@ -1,5 +1,5 @@
 import { loadHeaderFooter } from "./headerFooter.mjs";
-import { consoleAPI, convertToJson } from "./utils.mjs"
+import { consoleAPI, convertToJson, glint } from "./utils.mjs"
 import { addElement, returnElement, addButton, createMenu, returnButton } from "./elementCreation.mjs"
 import Character from "./character.mjs";
 
@@ -16,6 +16,8 @@ document.querySelector("#character-name").textContent = character.name;
 // consoleAPI(dndAPI + "classes")
 
 async function displayClassInfo(info) {
+
+    glint(info);
 
     const informationElement = document.querySelector("#information");
     // fetch api

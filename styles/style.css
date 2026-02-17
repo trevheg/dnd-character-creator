@@ -199,6 +199,17 @@ dialog[open] {
     /* margin: auto; */
 }
 
+.showing-attribute {
+    animation-name: glint;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes glint {
+    50%{background-color: var(--primary-color);}
+    100%{background-color: var(--tertiary-color);}
+}
+
 /* info */
 .infoElement{
     max-height: 0;

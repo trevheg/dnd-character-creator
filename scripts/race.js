@@ -1,6 +1,6 @@
 
 import { loadHeaderFooter } from "./headerFooter.mjs";
-import { consoleAPI, convertToJson } from "./utils.mjs"
+import { consoleAPI, convertToJson, glint } from "./utils.mjs"
 import { addElement, returnElement, addButton, createMenu, returnButton } from "./elementCreation.mjs"
 import Character from "./character.mjs";
 
@@ -13,10 +13,13 @@ const character = JSON.parse(localStorage.getItem("character")) || new Character
 document.querySelector("#character-name").textContent = character.name;
 
 async function displayRaceInfo(info) {
+
+    // make the button of the current attribute glint
+    glint(info);
+
     const informationElement = document.querySelector("#information");  
     // deletes the info element div
     informationElement.innerHTML = ""; 
-    // const infoElement = returnElement("div", '', "infoElement");
 
     // creating a div to put inside the other div so that it can be erased and expand when created 
     const infoElement = document.createElement("div");
