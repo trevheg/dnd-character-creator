@@ -1,6 +1,7 @@
 import { loadHeaderFooter } from "./headerFooter.mjs";
 import { consoleAPI, convertToJson } from "./utils.mjs"
 import { addElement, returnElement, addButton, createMenu, returnButton } from "./elementCreation.mjs"
+import Character from "./character.mjs";
 
 loadHeaderFooter();
 
@@ -9,7 +10,7 @@ const dndShortAPI = "https://www.dnd5eapi.co"
 
 // consoleAPI(dndAPI + "classes");
 
-const character = JSON.parse(localStorage.getItem("character"));
+const character = JSON.parse(localStorage.getItem("character")) || new Character();
 document.querySelector("#character-name").textContent = character.name;
 
 // consoleAPI(dndAPI + "classes")
@@ -28,17 +29,15 @@ async function displayClassInfo(info) {
     const infoElement = document.createElement("div");
     infoElement.classList.add("infoElement");
 
-    // console.log(dndShortAPI + data.subclasses[0].url)
 
     // Display the Chosen Class and Information about that class
     const subclassResponse = await fetch(dndShortAPI + data.subclasses[0].url);
     const subclassData = await convertToJson(subclassResponse);  
-    // console.log(subclassData)        
+     
     addElement(infoElement, "h2", `${subclassData.name} ${data.name}` , "");
     addElement(infoElement, "h3", subclassData.desc, "factElement")
 
-    // consoleAPI(dndShortAPI + data.class_levels)
-    // consoleAPI(dndShortAPI + subclassData.subclass_levels[0])
+
 
     // display class features at level 1
     addElement(infoElement, "h2", " Level 1 features:")
@@ -77,7 +76,7 @@ async function displayClassInfo(info) {
     const submitButton = addButton(infoElement, `Make ${character.name} a(n) ${data.name}`, "submit-button", () => {
         character.class = data.name;
         localStorage.setItem('character', JSON.stringify(character));
-        window.location.href = "class.html";
+        window.location.href = "character-sheet.html";
     } );
 
     // make info element grow instead of suddenly appear
