@@ -144,8 +144,16 @@ form div {
 
 }
 
+/* name generator */
+#name-generator, #name-input {
+    border: solid var(--tertiary-color) .5rem;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
 
 
+/* dialogs */
 
 dialog {
   transition: scale .3s ease allow-discrete, opacity .3s ease allow-discrete;
