@@ -17,6 +17,7 @@ async function displayRaceInfo(info) {
     informationElement.innerHTML = ""; 
     // const infoElement = returnElement("div", '', "infoElement");
 
+    // creating a div to put inside the other div so that it can be erased and expand when created 
     const infoElement = document.createElement("div");
     infoElement.classList.add("infoElement");
     

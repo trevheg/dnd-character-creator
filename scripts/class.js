@@ -16,15 +16,17 @@ document.querySelector("#character-name").textContent = character.name;
 
 async function displayClassInfo(info) {
 
-    const infoElement = document.querySelector("#information");
+    const informationElement = document.querySelector("#information");
     // fetch api
     const response = await fetch(dndShortAPI + info.url);
     const data = await convertToJson(response);    
     console.log(data)
 
-    infoElement.classList.remove('expanded');
+    informationElement.innerHTML = '';
 
-    infoElement.innerHTML = '';
+    // creating a div to put inside the other div so that it can be erased and expand when created 
+    const infoElement = document.createElement("div");
+    infoElement.classList.add("infoElement");
 
     // console.log(dndShortAPI + data.subclasses[0].url)
 
@@ -79,7 +81,7 @@ async function displayClassInfo(info) {
     } );
 
     // make info element grow instead of suddenly appear
-
+    informationElement.appendChild(infoElement);
     infoElement.offsetHeight;  // Force reflow
     infoElement.classList.add('expanded');
 
